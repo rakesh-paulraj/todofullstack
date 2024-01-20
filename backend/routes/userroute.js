@@ -119,21 +119,25 @@ router.put('/completed',middleware,async function(req,res){
     
     const todoId = req.body._id;
 
-    
-    const result = await Todo.updateOne(
-        { _id: todoId, user: { $in: [username] } }, 
-        { completed: true }
-    );
-
-    if (result.nModified === 0) {
+    const user= await User.findOne({username}).populate('todos');
+    if(!user){
         return res.status(404).json({
-            msg: "Todo not found or does not belong to the user",
-        });
+            msg:"user not found"
+        })
+    }
+    const todo = await Todo.findOne({ _id: todoId });
+    if(!todo){
+        return res.status(404).json({
+            msg:"todo is not found"
+        })
     }
 
-    return res.json({
-        msg: "Todo updated",
-    });
+    await Todo.findByIdAndUpdate(todoId, { completed: true });
+
+    return res.json({ msg: "Todo marked as completed" });
+
+
+    
 } catch (error) {
     console.error(error);
     return res.status(500).json({
