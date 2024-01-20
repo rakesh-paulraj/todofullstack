@@ -1,7 +1,7 @@
 const express= require("express");
 const router =express();
-const {User}=require ("../database/user");
-const {Todo}=require ("../database/todo");
+const User=require ("../database/user");
+const Todo=require ("../database/Todo");
 const jwt =require("jsonwebtoken");
 const {JWT_SECRET} = require("../config.js");
 const middleware=require("../middlewares/usermiddleware.js");
@@ -24,7 +24,7 @@ router.post('/signup',async (req,res)=>{
 });
 router.post('/signin',async (req,res)=>{
     const username= req.body.username;
-    const password=rew.body.password;
+    const password=req.body.password;
 
     const user= await User.find({
         username,
@@ -44,9 +44,10 @@ router.post('/signin',async (req,res)=>{
             msg:"Wrong password or username"
         })
     }
+});
 
 router.post('/todo', middleware , async function(req,res){
-    const username =decodedvalue.username;
+    const username =res.locals.decodedvalue.username;
     const createpaytodo=req.body;
     const parsedpaytodo=createtodo.safeParse(createpaytodo);
 
@@ -80,7 +81,7 @@ router.post('/todo', middleware , async function(req,res){
 
         res.json({
             msg: "Todo created",
-            todo,
+            user,
         });
     } catch (error) {
         console.error(error);
@@ -92,7 +93,7 @@ router.post('/todo', middleware , async function(req,res){
 
 router.get('/todos',middleware, async function(req,res){
     try{
-    const username=decodedvalue.username;
+    const username=res.locals.decodedvalue.username;
     const user = await User.findOne({ username }).populate('todos');
     if (!user) {
         return res.status(404).json({
@@ -101,28 +102,22 @@ router.get('/todos',middleware, async function(req,res){
     }
 
     return res.json({
-        
-        todos: user.todos,
+         todos: user.todos,
     });
 } catch (error) {
-    console.error(error);
+    console.error("Error in /todos route:", error);
     return res.status(500).json({
         msg: "Internal Server Error",
     });
 }
-    });
 });
-router.put('completed',middleware,async function(req,res){
+
+router.put('/completed',middleware,async function(req,res){
     
-    try{const username=decodedvalue.username;
-    const uploadpayload=req.body;
-    const parsedupdatetodo=updatetodo.safeParse(uploadpayload);
-    if(!parsedupdatetodo.success){
-        res.status(411).json({
-            msg:"wrong inputs"
-        })
-    }
-    const todoId = req.body.id;
+    try{
+        const username=res.locals.decodedvalue.username;
+    
+    const todoId = req.body._id;
 
     
     const result = await Todo.updateOne(
