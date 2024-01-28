@@ -10,7 +10,7 @@ const userschema=mongoose.Schema({
     password:String,
     todos: [{
         type: Schema.Types.ObjectId,
-        ref: "Todo", // Assuming "Todo" is the name of the referenced model
+        ref: "Todo", 
         required: [true, "Todo Id is required to store todo for user"]
     }]
 });
@@ -18,6 +18,5 @@ const userschema=mongoose.Schema({
 
 const User= mongoose.model('user',userschema);
 
-module.exports={
-    User
-};
+module.exports=
+    User;

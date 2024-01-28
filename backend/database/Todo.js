@@ -11,8 +11,7 @@ const todoschema = mongoose.Schema({
     completed: Boolean
 });
 
-const Todo = mongoose.model('todo', todoschema);
+const Todo = mongoose.model('Todo', todoschema);
 
-module.exports = {
-    Todo
-};
+module.exports = 
+    Todo;

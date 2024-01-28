@@ -6,7 +6,7 @@ const token =req.headers.authorization;
 const words=token.split(" ");
 const jwttoken=words[1];
 const decodedvalue=jwt.verify(jwttoken,JWT_SECRET);
- 
+ res.locals.decodedvalue=decodedvalue;
 if(decodedvalue.username){
     next();
 }
