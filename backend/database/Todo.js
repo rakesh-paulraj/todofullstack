@@ -8,10 +8,11 @@ mongoose.connect("mongodb+srv://admin:fQ8qLRJqWtSwH33G@cluster0.mmielod.mongodb.
 const todoschema = mongoose.Schema({
     title: String,
     description: String,
-    completed: Boolean
+    completed: Boolean    
+
 });
 
 const Todo = mongoose.model('Todo', todoschema);
 
-module.exports = 
-    Todo;
+module.exports ={Todo} ;
+    
