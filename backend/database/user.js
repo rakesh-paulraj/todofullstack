@@ -6,14 +6,22 @@ mongoose.connect("mongodb+srv://admin:fQ8qLRJqWtSwH33G@cluster0.mmielod.mongodb.
 
 
 const userschema=mongoose.Schema({
-    username:String,
-    password:String,
-    todos: [{
-        type: Schema.Types.ObjectId,
-        ref: "Todo", 
-        required: [true, "Todo Id is required to store todo for user"]
-    }]
-});
+    name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+      password: {
+        type: String,
+        required: true,
+        select: false,
+      },
+      
+    });
 
 
 const User= mongoose.model('user',userschema);
