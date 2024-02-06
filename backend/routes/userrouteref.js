@@ -1,6 +1,6 @@
 const express= require("express");
 const router =express();
-const User=require ("../database/user");
+const User=require ("../database/User");
 const jwt =require("jsonwebtoken");
 const {JWT_SECRET} = require("../config.js");
 const middleware=require("../middlewares/usermiddleware.js");

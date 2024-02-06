@@ -2,6 +2,9 @@ const {Router}=require("express");
 const router =Router();
 const userrouter=require("./userroute");
 const todorouter=require("./todoroute");
-const cors=require("cors");
-router.use(cors());
-router.use("/user",)
+
+
+router.use("/user",userrouter);
+router.use("/todo",todorouter);
+
+modules.exports=router;
