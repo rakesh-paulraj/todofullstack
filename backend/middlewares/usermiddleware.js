@@ -1,4 +1,4 @@
-const {JWT_SECRET}= require("../config.js");
+const {JWT_SECRET}= require("../JWTSECRET.js");
 const jwt=require("jsonwebtoken");
 
 function middleware(req,res,next){
