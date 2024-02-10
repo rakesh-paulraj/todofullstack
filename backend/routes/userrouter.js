@@ -52,14 +52,38 @@ const user =await User.findOne({
         next(error);
     }
 
-})
+});
 router.get("/user",usermiddleware,(req,res)=>{
     res.status(200).json({
         success: true,
         user: req.user,
       });
 })
-router.
+router.get("/logout",(req,res,next)=>{
+    try{
+       
+        res.setHeader("Authorization","");
+        res.json({
+            success: true,
+            message: 'Logout successful',
+          });
+    }catch(error){
+        console.log(error);
+        next(error)
+    }
+})
+router.post("/deleteuser", async (req,res,next )=>{
+    try{
+        const user=await User.findByIdAndDelete(req.user._id);
+        res.json({
+            
+            message:"User deleted successfully"
+        })
+    }
+    catch(error){
+        next(error);
+    }
+})
 
 
 modules.exports=router;
