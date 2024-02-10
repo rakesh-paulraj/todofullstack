@@ -10,7 +10,7 @@ const todoschema=new mongoose.Schema({
     title:{
         type:String,
         required:true,
-    },des:{
+    },description:{
         type:String,
         required:true,
     },tag:{
