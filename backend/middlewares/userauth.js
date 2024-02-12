@@ -2,7 +2,7 @@ const { JWT_SECRET } = require("../JWTSECRET.js");
 const jwt = require("jsonwebtoken");
 const User = require("../database/User");
 
-export const usermiddleware = async (req, res, next) => {
+ const usermiddleware = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
 
@@ -29,3 +29,4 @@ export const usermiddleware = async (req, res, next) => {
     return res.status(401).json({ error: "Invalid JWT token" });
   }
 };
+exports.usermiddleware = usermiddleware;

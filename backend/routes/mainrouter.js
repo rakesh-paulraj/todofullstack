@@ -1,10 +1,10 @@
 const {Router}=require("express");
 const router =Router();
-const userrouter=require("./userroute");
-const todorouter=require("./todoroute");
+const userrouter=require("./userrouter");
+const todorouter=require("./todorouter");
 
 
 router.use("/user",userrouter);
 router.use("/todo",todorouter);
 
-modules.exports=router;
+module.exports=router;

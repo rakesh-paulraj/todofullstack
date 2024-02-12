@@ -1,7 +1,7 @@
 const {Router}=require("express");
 const router=Router();
 const User=require ("../database/User");
-const resgisteruser = require("../zod/userzod");
+const resgisteruser = require("../validator/userzod");
 const {JWT_SECRET}=require("../JWTSECRET.js");
 const { usermiddleware } = require("../middlewares/userauth");
 
@@ -84,6 +84,6 @@ router.delete("/:id", async (req, res, next) => {
 });
 
 
-modules.exports=router;
+module.exports=router;
 
 

@@ -2,7 +2,7 @@ const mongoose= require("mongoose");
 const{Schema,model}=require("mongoose");
 
 
-mongoose.connect("mongodb+srv://admin:fQ8qLRJqWtSwH33G@cluster0.mmielod.mongodb.net/todo_fullstack")
+mongoose.connect("mongodb+srv://admin:fQ8qLRJqWtSwH33G@cluster0.mmielod.mongodb.net/doer")
 
 
 const userschema=mongoose.Schema({
