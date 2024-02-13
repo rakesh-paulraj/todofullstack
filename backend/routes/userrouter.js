@@ -1,7 +1,7 @@
 const {Router}=require("express");
 const router=Router();
 const User=require ("../database/User");
-const resgisteruser = require("../validator/userzod");
+const registeruser = require("../validator/userzod");
 const {JWT_SECRET}=require("../JWTSECRET.js");
 const { usermiddleware } = require("../middlewares/userauth");
 
@@ -9,11 +9,11 @@ const { usermiddleware } = require("../middlewares/userauth");
 router.post("/signup",async (req,res,next)=>{
     try{
         const signupuser=req.body;
-        const {success}=resgisteruser.safeParse(signupuser);
+       
         const dbcheck=await User.findOne({
             username:signupuser.username
         });
-     if(success && !dbcheck){
+     if(  !dbcheck){
         const user=  await User.create({
             signupuser
         }) 

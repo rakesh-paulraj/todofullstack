@@ -4,6 +4,9 @@ const cors=require("cors");
 const express=require("express");
 const router =express();
 router.use(cors());
+const express=require("express");
+
+router.use (express.json());
 
 
 router.use("/api/v1/",mainrouter);
