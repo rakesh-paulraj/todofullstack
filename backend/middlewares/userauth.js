@@ -19,14 +19,14 @@ const User = require("../database/User");
 
     const decodedvalue = jwt.verify(jwttoken, JWT_SECRET);
 
-    if (!decodedvalue || !decodedvalue._id) {
-      return res.status(401).json({ error: "Invalid JWT token" });
+    if (!decodedvalue ) {
+      return res.status(401).json({ error: "Invalid OR WRONG  JWT token" });
     }
 
     req.user = await User.findById(decodedvalue._id);
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Invalid JWT token" });
+    return res.status(401).json({ error: "Not a good JWT token" });
   }
 };
 exports.usermiddleware = usermiddleware;

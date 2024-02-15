@@ -1,22 +1,28 @@
 const {Router}=require("express");
 const router=Router();
 const User=require ("../database/User");
-const registeruser = require("../validator/userzod");
 const {JWT_SECRET}=require("../JWTSECRET.js");
+const jwt = require('jsonwebtoken');
+
 const { usermiddleware } = require("../middlewares/userauth");
 
 
 router.post("/signup",async (req,res,next)=>{
     try{
-        const signupuser=req.body;
+        const name=req.body.name;
+        const password=req.body.password;
+        const email=req.body.email;
        
         const dbcheck=await User.findOne({
-            username:signupuser.username
+            name:name,
+           
         });
      if(  !dbcheck){
         const user=  await User.create({
-            signupuser
-        }) 
+            name:name,
+            password:password,
+            email:email
+             }) 
         res.json({
             message:"User created succesfully"
         })

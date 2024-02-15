@@ -1,16 +1,18 @@
-
+const  express=require("express"); 
 const mainrouter=require("../backend/routes/mainrouter");
 const cors=require("cors");
-const express=require("express");
-const router =express();
-router.use(cors());
-const express=require("express");
-
-router.use (express.json());
 
 
-router.use("/api/v1/",mainrouter);
+const app = express(); 
 
-router.listen(3000, () => {
+
+
+app.use (express.json());
+app.use(cors()); 
+
+app.use("/api/v1/",mainrouter);
+console.log("Before server starts");
+app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
+console.log("After server starts");
