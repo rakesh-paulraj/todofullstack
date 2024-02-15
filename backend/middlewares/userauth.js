@@ -23,7 +23,14 @@ const User = require("../database/User");
       return res.status(401).json({ error: "Invalid OR WRONG  JWT token" });
     }
 
-    req.user = await User.findById(decodedvalue._id);
+    try {
+      req.user = await User.findOne({_id:decodedvalue._id});
+      console.log('User from Database:', req.user);
+      next();
+   } catch (error) {
+      console.error('Error finding user in the database:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+   }
     next();
   } catch (error) {
     return res.status(401).json({ error: "Not a good JWT token" });

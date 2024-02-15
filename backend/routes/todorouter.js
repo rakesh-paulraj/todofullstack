@@ -70,7 +70,7 @@ router.delete("/deletetodo/:id",async (req,res,next)=>{
         });
     }
     catch (error) {
-        // Handle any errors that occur during the process
+       
         next(error);
     }
 })
