@@ -1,15 +1,19 @@
 const {Router}=require("express");
 const router=Router();
-const Todo=require ("../database/Todo");
+const{Todo} =require ("../database/Todo");
+const { usermiddleware } = require("../middlewares/userauth");
 
-router.post("/createtodo",async(req,res,next)=>{
+
+router.post("/createtodo",usermiddleware,async(req,res,next)=>{
     try{
+        const userid = req.user;
         const{title,description,tag}=req.body;
-        await Todo.create({
+       const todo= await Todo.create({
             title,
             description,
             tag,
-            user:req.user._id});
+            user: userid, 
+        });
             res.status(201).json({
                 message:"Todo created succesfully"})
 
@@ -19,7 +23,7 @@ router.post("/createtodo",async(req,res,next)=>{
 
 });
 
-router.get("/getalltodos",async (req,res,next)=>{
+router.get("/getalltodos",usermiddleware,async (req,res,next)=>{
     try{
         const userid = req.user._id;
         const todos=await Todo.find({user:userid});
@@ -28,6 +32,7 @@ router.get("/getalltodos",async (req,res,next)=>{
         })
     }catch(error){
         next(error);
+
 
     }
 })
